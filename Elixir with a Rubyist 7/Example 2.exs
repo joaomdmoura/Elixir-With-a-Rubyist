@@ -7,7 +7,7 @@ current_proc = self()
 # No messages waiting.
 
 
-# This time we sen mutiple messages to this same process
+# This time we send mutiple messages to this same process
 # we will send tuples, with a `:new_message` atom and
 # an integer
 send(current_proc, {:new_message, 1})
@@ -27,9 +27,9 @@ receive do
   {:new_message, n} -> IO.inspect("Received new message: #{n}")
 end
 # "Received new message: 1"
-# 
+#
 # Only the first message was handled, the other two
-# are still in the list waiting for another 
+# are still in the list waiting for another
 # receive block
 
 :erlang.process_info(self(), :messages)
