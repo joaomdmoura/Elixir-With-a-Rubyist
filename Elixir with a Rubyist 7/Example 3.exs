@@ -2,28 +2,28 @@
 # funciton.
 defmodule Sum do
 
-  # The `sum_number/1` expects one argumento, an integer 
-  # that will be used to perform a sum operation  
+  # The `sum_number/1` expects one argument, an integer
+  # that will be used to perform a sum operation
   def sum_number(x) do
 
     # Here we use `receive` to match messages into the
     # tuple `{:sum, n}` where `n` is an integer sent
     # with in the message.
-    # At this point the process will stop and wait for a 
+    # At this point the process will stop and wait for a
     # message before trying to match it and move on.
     receive do
-      {:sum, n} -> 
+      {:sum, n} ->
 
-        # We display the result of the sum between the number 
+        # We display the result of the sum between the number
         # passed as argument to `sum_number/1` and the number
         # on the received message
         IO.inspect(x + n)
 
         # Call this function again passing the same argument.
         # By using recursion (calling this function again)
-        # we setup the receive block again, waiting for the 
+        # we setup the receive block again, waiting for the
         # next message, so every time a message is received
-        # this function will handle it and setup a new receive 
+        # this function will handle it and setup a new receive
         # block to handle the next one
         sum_number(x)
     end
@@ -55,7 +55,7 @@ send(sum_proc, {:sum, 6})
 send(sum_proc, {:sum, 2})
 # 4
 
-# Here we can check the process is still alive and 
+# Here we can check the process is still alive and
 # waiting for messsages
 Process.alive?(sum_proc)
 # true
